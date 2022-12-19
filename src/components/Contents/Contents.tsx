@@ -259,33 +259,30 @@ export default function Contents() {
       );
     }
       return (
-        <Box>
-          <ul>
-            {Object.entries(sortedCost).map(([k, v]) =>
-              if(k == "jp"){
-                let url = ""
-              }
+        <Box component="ul">
+          {Object.keys(sortedCost).map((key, index) => {
+            if(key == "jp"){
+              let url = ""
+            }
+            <Box
+              component="li"
+              // variant="h3"
+              color="text.primary"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <Box
-                component="li"
-                // variant="h3"
-                color="text.primary"
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box
-                  component="a"
-                  href={url}
-                  // color="text.primary"
-                  >
-                  {webpage}
-                </Box>
-                <Box> {price}円</Box>
-                <Box>{scheduled_date}</Box>
+                component="a"
+                href={url}
+                // color="text.primary"
+                >
+                {webpage}
               </Box>
-            )}
-          </ul>
+              <Box> {price}円</Box>
+              <Box>{scheduled_date}</Box>
+          }}
         </Box>
       )
   };
