@@ -1,4 +1,4 @@
-const searchedData = [
+const Data = [
   {
     img_path:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPjllb8RKmrEHo2LE0JXBkzToaPuJOhRKxY_0ceylsmfbJBC2lURTq4tfq41IDWiNFRQ&usqp=CAU",
@@ -11,7 +11,7 @@ const searchedData = [
       "https://www.amazon.co.jp/-/en/Nintendo-Switch-%E6%9C%89%E6%A9%9FEL%E3%83%A2%E3%83%87%E3%83%AB-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%AC%E3%83%83%E3%83%89/dp/B098B79SJL/ref=sr_1_2?keywords=%E3%83%8B%E3%83%B3%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81&qid=1668648944&qu=eyJxc2MiOiI0LjgxIiwicXNhIjoiNC40MSIsInFzcCI6IjMuODkifQ%3D%3D&s=videogames&sr=1-2",
     url_associate_jp: "",
     title_com: "Nintendo Switch – OLED Model w/ Neon Red & Neon Blue Joy-Con",
-    asin_com: "B098RL6SBJ",
+    asin_com: "AAAAAAAA",
     url_com:
       "https://www.amazon.com/Nintendo-Switch-OLED-Model-Neon-Joy/dp/B098RL6SBJ/ref=sr_1_2?keywords=Nintendo+Switch&qid=1668648998&sr=8-2",
     url_associate_: "",
@@ -59,7 +59,7 @@ const searchedData = [
       "https://www.amazon.co.jp/-/en/Nintendo-Switch-%E6%9C%89%E6%A9%9FEL%E3%83%A2%E3%83%87%E3%83%AB-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%AC%E3%83%83%E3%83%89/dp/B098B79SJL/ref=sr_1_2?keywords=%E3%83%8B%E3%83%B3%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81&qid=1668648944&qu=eyJxc2MiOiI0LjgxIiwicXNhIjoiNC40MSIsInFzcCI6IjMuODkifQ%3D%3D&s=videogames&sr=1-2",
     url_associate_jp: "",
     title_com: "Nintendo Switch – OLED Model w/ Neon Red & Neon Blue Joy-Con",
-    asin_com: "B098RL6SBJ",
+    asin_com: "BBBBBBBB",
     url_com:
       "https://www.amazon.com/Nintendo-Switch-OLED-Model-Neon-Joy/dp/B098RL6SBJ/ref=sr_1_2?keywords=Nintendo+Switch&qid=1668648998&sr=8-2",
     url_associate_: "",
@@ -108,7 +108,7 @@ const searchedData = [
       "https://www.amazon.co.jp/-/en/Nintendo-Switch-%E6%9C%89%E6%A9%9FEL%E3%83%A2%E3%83%87%E3%83%AB-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC-%E3%83%8D%E3%82%AA%E3%83%B3%E3%83%AC%E3%83%83%E3%83%89/dp/B098B79SJL/ref=sr_1_2?keywords=%E3%83%8B%E3%83%B3%E3%83%86%E3%83%B3%E3%83%89%E3%83%BC%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81&qid=1668648944&qu=eyJxc2MiOiI0LjgxIiwicXNhIjoiNC40MSIsInFzcCI6IjMuODkifQ%3D%3D&s=videogames&sr=1-2",
     url_associate_jp: "",
     title_com: "Nintendo Switch – OLED Model w/ Neon Red & Neon Blue Joy-Con",
-    asin_com: "B098RL6SBJ",
+    asin_com: "CCCCCCCC",
     url_com:
       "https://www.amazon.com/Nintendo-Switch-OLED-Model-Neon-Joy/dp/B098RL6SBJ/ref=sr_1_2?keywords=Nintendo+Switch&qid=1668648998&sr=8-2",
     url_associate_com: "",
@@ -147,4 +147,4 @@ const searchedData = [
   },
 ];
 
-export default searchedData;
+export default Data;

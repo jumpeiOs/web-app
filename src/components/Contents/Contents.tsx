@@ -20,7 +20,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import Hero from "./Hero";
 import Footer from "../Footer/Footer";
 
-// import Data from "./PracticeData";
+import ItemReviewCard from "./ItemReviewCard";
 import Data from "./PracticeSearchedData";
 import { valueToPercent } from "@mui/base";
 
@@ -108,101 +108,13 @@ export default function Contents() {
     sortedCost = Object.fromEntries(
       Object.entries(cost).sort(([, a], [, b]) => a - b)
     );
-
+    // console.log(data.data);
     return (
-      <div>
-        <Accordion key={data.asin_jp}>
-          <AccordionSummary
-            aria-controls={data.asin_jp}
-            id={data.asin_jp}
-            sx={{
-              pointerEvents: "none",
-              my: "10px",
-            }}
-            expandIcon={
-              <ExpandMoreIcon
-                sx={{
-                  pointerEvents: "auto",
-                }}
-              />
-            }
-          >
-            <Card
-              sx={{
-                width: "100%",
-                borderRadius: 2,
-                marginTop: 2,
-              }}
-            >
-              <CardContent>
-                <Grid container sx={{ alignItems: "center" }}>
-                  <Grid item key="image" xs={4} sm={4} md={4} lg={4} xl={4}>
-                    {/* <ImageList
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          m: 0,
-                          p: 0,
-                        }}
-                        cols={1}
-                      >
-                        <ImageListItem key={data.img_path}>
-                          <Box
-                            component="img"
-                            src={`${data.img_path}?w=164&h=164&fit=crop&auto=format`}
-                            srcSet={`${data.img_path}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                            alt={omittedContent(data.title_jp)}
-                            loading="lazy"
-                          />
-                        </ImageListItem>
-                      </ImageList> */}
-                  </Grid>
-                  <Grid
-                    item
-                    xs={8}
-                    sm={8}
-                    md={8}
-                    lg={8}
-                    xl={8}
-                    sx={{ textAlign: "center" }}
-                  >
-                    <Typography
-                      color="text.secondary"
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        pl: 1,
-                        m: 0.5,
-                        mt: -1,
-                      }}
-                    >
-                      {omittedContent(data.category)}
-                      {omittedContent(data.brand)}
-                    </Typography>
-                    {/* <Typography
-                      sx={{
-                        fontSize: 18,
-                        fontWeight: 540,
-                        ms: 0.5,
-                        pl: 1,
-                      }}
-                    >
-                      {omittedContent(data.title_jp)}
-                    </Typography> */}
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+      <ItemReviewCard
+        img_path={data.img_path}
+        category={data.category}
+        brand={data.brand}
+      />
     );
   };
 
@@ -215,7 +127,7 @@ export default function Contents() {
       <Container maxWidth="md" component="main">
         <Grid container alignItems="flex-start">
           {Data.map((data: any) => (
-            <SortByPrice data={data} />
+            <SortByPrice key={data.asin_jp} data={data} />
           ))}
         </Grid>
       </Container>
