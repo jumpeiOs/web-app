@@ -14,42 +14,41 @@ function Copyright(props: any) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
+        My Website
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
 const footers = [
   {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
+    title: "未工事",
+    description: [""],
   },
-  {
-    title: "Features",
-    description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
-    ],
-  },
-  {
-    title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
-  },
-  {
-    title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
-  },
+  // {
+  //   title: "Features",
+  //   description: [
+  //     "Cool stuff",
+  //     "Random feature",
+  //     "Team feature",
+  //     "Developer stuff",
+  //     "Another one",
+  //   ],
+  // },
+  // {
+  //   title: "Resources",
+  //   description: [
+  //     "Resource",
+  //     "Resource name",
+  //     "Another resource",
+  //     "Final resource",
+  //   ],
+  // },
+  // {
+  //   title: "Legal",
+  //   description: ["Privacy policy", "Terms of use"],
+  // },
 ];
 
 export default function Footer() {
@@ -69,7 +68,12 @@ export default function Footer() {
         <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
+              <Typography
+                variant="h6"
+                color="text.primary"
+                gutterBottom
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
                 {footer.title}
               </Typography>
               <ul>

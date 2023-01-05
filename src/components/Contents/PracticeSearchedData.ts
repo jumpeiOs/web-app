@@ -1,7 +1,7 @@
 const Data = [
   {
     img_path:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPjllb8RKmrEHo2LE0JXBkzToaPuJOhRKxY_0ceylsmfbJBC2lURTq4tfq41IDWiNFRQ&usqp=CAU",
+      "https://www.kotsuxkotsu.work/wp-content/uploads/2022/08/%E7%B8%A6%E9%95%B7.webp",
     category: "VideoGames",
     brand: "任天堂 Nintendo",
     title_jp:

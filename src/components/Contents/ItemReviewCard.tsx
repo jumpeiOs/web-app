@@ -1,5 +1,10 @@
-import * as React from "react";
+import React, { useState, useMemo } from "react";
 import { styled } from "@mui/material/styles";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+  MemoryRouter,
+} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -16,10 +21,26 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import List from "@mui/material/List";
+import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
+import { padding } from "@mui/system";
+import Divider from "@mui/material/Divider";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
+// interface Price {
+//   jp?: number;
+//   com?: number;
+//   uk?: number;
+//   es?: number;
+//   fr?: number;
+//   it?: number;
+//   de?: number;
+//   yodobashi?: number;
+// }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -32,75 +53,174 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
-  const [expanded, setExpanded] = React.useState(false);
+export default function ItemReviewCard(props: any) {
+  const [expanded, setExpanded]: [boolean | string, any] =
+    React.useState(false);
+  let sortedCost = {};
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  let items = [
+    {
+      region: "amazon.co.jp",
+      id: props.asin_jp,
+      price: Number(props.price_jp) + Number(props.extra_fee_jp),
+      _price: props.price_jp + "円",
+      extra: props.extra_fee_jp + "円",
+      date: props.scheduled_date_jp,
+      url: props.url_jp,
+    },
+    {
+      region: "amazon.com",
+      id: props.asin_com,
+      price: Number(props.price_com) + Number(props.extra_fee_com),
+      _price: "$" + props.price_com,
+      extra: "$" + props.extra_fee_com,
+      date: props.scheduled_date_com,
+      url: props.url_com,
+    },
+    {
+      region: "amazon.co.uk",
+      id: props.asin_uk,
+      price: Number(props.price_uk) + Number(props.extra_fee_uk),
+      _price: "£" + props.price_uk,
+      extra: "£" + props.extra_fee_uk,
+      date: props.scheduled_date_uk,
+      url: props.url_uk,
+    },
+    {
+      region: "amazon.es",
+      id: props.asin_es,
+      price: Number(props.price_es) + Number(props.extra_fee_es),
+      _price: props.price_es + "€",
+      extra: props.extra_fee_es + "€",
+      date: props.scheduled_date_es,
+      url: props.url_es,
+    },
+    {
+      region: "amazon.fr",
+      id: props.asin_fr,
+      price: Number(props.price_fr) + Number(props.extra_fee_fr),
+      _price: props.price_fr + "€",
+      extra: props.extra_fee_fr + "€",
+      date: props.scheduled_date_fr,
+      url: props.url_fr,
+    },
+    {
+      region: "amazon.it",
+      id: props.asin_it,
+      price: Number(props.price_it) + Number(props.extra_fee_it),
+      _price: props.price_it + "€",
+      extra: props.extra_fee_it + "€",
+      date: props.scheduled_date_it,
+      url: props.url_it,
+    },
+    {
+      region: "amazon.de",
+      id: props.asin_de,
+      price: Number(props.price_de) + Number(props.extra_fee_de),
+      _price: "€" + props.price_de,
+      extra: "€" + props.extra_fee_de,
+      date: props.scheduled_date_de,
+      url: props.url_de,
+    },
+    {
+      region: "yodobashi.com",
+      id: props.asin_yodobashi,
+      price: Number(props.price_yodobashi) + Number(props.extra_fee_yodobashi),
+      _price: props.price_yodobashi + "円",
+      extra: props.extra_fee_yodobashi + "円",
+      date: props.scheduled_date_yodobashi,
+      url: props.url_yodobashi,
+    },
+  ];
+
+  const sorted_items = useMemo(() => {
+    // if (sort.key) {
+    items = items.sort((x, y) => {
+      // a = a[sort.key];
+      // b = b[sort.key];
+      let a = x.price;
+      let b = y.price;
+
+      if (a === b) {
+        return 0;
+      }
+      if (a > b) {
+        return 1;
+        // * sort.order
+      }
+      if (a < b) {
+        return -1;
+        //  * sort.order;
+      }
+    });
+    // }
+    return items;
+  }, [expanded]);
+
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "100%", mb: "5px" }}>
       <Grid container sx={{ alignItems: "center" }}>
-        <Grid item key="image" xs={4} sm={4} md={4} lg={4} xl={4}>
-          <CardMedia
-            component="img"
-            height="100%"
+        <Grid item key="image" xs={5} sm={5} md={5} lg={4} xl={4}>
+          <Card
+            raised
             sx={{
-              m: { xs: "10%", sm: "10%", md: "5%", bg: "5%" },
+              maxWidth: 200,
+              margin: "5px 0 0 5px",
+              padding: "0.1em",
             }}
-            image="https://www.galiton.co.jp/shop/item/toys/picture/goods/4501_1.jpg"
-            alt="Item image"
-          />
+          >
+            <CardMedia
+              component="img"
+              height="120"
+              width="120"
+              sx={{
+                objectFit: "contain",
+                m: "auto",
+                // { xs: "5%", sm: "5%", md: "5%", bg: "5%" },
+              }}
+              image={props.img_path}
+              alt="Item image"
+            />
+          </Card>
         </Grid>
-        <Grid
-          item
-          xs={8}
-          sm={8}
-          md={8}
-          lg={8}
-          xl={8}
-          // sx={{ textAlign: "left", px: "10px" }}
-        >
+        <Grid item xs={7} sm={7} md={7} lg={8} xl={8}>
           <Typography
+            component="div"
             color="text.secondary"
             sx={{
-              mt: 1,
-              pl: 3,
+              fontSize: 10,
+              pl: 1.5,
+              mt: 1.5,
             }}
           >
-            <Box>VideoGames</Box>
-            <Box>任天堂 Nintendo</Box>
-            {/* {props.category} */}
-            {/* {props.brand} */}
+            <Box>カテゴリー: {props.category}</Box>
           </Typography>
           <Typography
+            component="div"
             sx={{
-              fontSize: 18,
+              fontSize: 14,
               fontWeight: 600,
               mt: 1,
-              pl: 3,
+              px: 1.5,
             }}
           >
-            Nintendo Switch(有機ELモデル) Joy-Con(L) ネオンブルー/(R)
-            ネオンレッド
-            {/* {props.title_jp} */}
+            {props.title_jp}
           </Typography>
         </Grid>
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+          <Typography component="div" variant="body2" color="text.primary">
+            {/* {props.sortedCost[2]} */}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+        <CardActions
+          disableSpacing
+          sx={{ flexGrow: 1, justifyContent: "space-between" }}
+        >
+          <Box sx={{ fontSize: "12px" }}>ブランド: {props.brand}</Box>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -111,157 +231,43 @@ export default function RecipeReviewCard() {
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-              over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-              stirring occasionally until lightly browned, 6 to 8 minutes.
-              Transfer shrimp to a large plate and set aside, leaving chicken
-              and chorizo in the pan. Add pimentón, bay leaves, garlic,
-              tomatoes, onion, salt and pepper, and cook, stirring often until
-              thickened and fragrant, about 10 minutes. Add saffron broth and
-              remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes
-              and peppers, and cook without stirring, until most of the liquid
-              is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-              reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is
-              just tender, 5 to 7 minutes more. (Discard any mussels that
-              don&apos;t open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then
-              serve.
-            </Typography>
+          <CardContent sx={{ pt: "0px" }}>
+            <Box>
+              <ul className="movie_list">
+                {sorted_items.map((item, index) =>
+                  item.price !== 0 ? (
+                    <li>
+                      <Divider variant="middle" sx={{ my: "5px" }} />
+                      <Container
+                        sx={{ display: "flex", justifyContent: "space-around" }}
+                      >
+                        <Button>
+                          <a
+                            target="_blank"
+                            className="text-inherit no-underline"
+                            href={item.url}
+                          >
+                            {item.region}
+                          </a>
+                        </Button>
+                        <Box sx={{ p: "6px 8px 6px 8px" }}>{item.price}円</Box>
+                      </Container>
+                      <Container sx={{ fontSize: "12px" }}>
+                        (価格約 {item._price} + 関税/配送料 {item.extra})
+                      </Container>
+                      <Box sx={{ display: "flex", justifyContent: "center" }}>
+                        最短配送日 {item.date}
+                      </Box>
+                    </li>
+                  ) : (
+                    ""
+                  )
+                )}
+              </ul>
+            </Box>
           </CardContent>
         </Collapse>
       </Grid>
     </Card>
   );
 }
-
-//   return (
-//     <Card
-//       sx={{
-//         width: "100%",
-//         borderRadius: 2,
-//         marginTop: 5,
-//       }}
-//     >
-//       <CardContent>
-//         <Grid container sx={{ alignItems: "center" }}>
-//           <Grid item key="image" xs={4} sm={4} md={4} lg={4} xl={4}>
-//             <CardMedia
-//               component="img"
-//               // height="194"
-//               image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPjllb8RKmrEHo2LE0JXBkzToaPuJOhRKxY_0ceylsmfbJBC2lURTq4tfq41IDWiNFRQ&usqp=CAU"
-//               // {props.img_path}
-//               alt="Item image"
-//             />
-//           </Grid>
-//           <Grid
-//             item
-//             xs={8}
-//             sm={8}
-//             md={8}
-//             lg={8}
-//             xl={8}
-//             sx={{ textAlign: "left", px: "10px" }}
-//           >
-//             <Typography
-//               color="text.secondary"
-//               sx={{
-//                 display: "flex",
-//                 justifyContent: "space-between",
-//                 pl: 1,
-//                 m: 0.5,
-//                 mt: -8,
-//               }}
-//             >
-//               <Box>VideoGames</Box>
-//               <Box>任天堂 Nintendo</Box>
-//               {/* {props.category} */}
-//               {/* {props.brand} */}
-//             </Typography>
-//             <Typography
-//               sx={{
-//                 fontSize: 18,
-//                 fontWeight: 540,
-//                 mt: 2,
-//                 pl: 1,
-//               }}
-//             >
-//               Nintendo Switch(有機ELモデル) Joy-Con(L) ネオンブルー/(R)
-//               ネオンレッド
-//               {/* {props.title_jp} */}
-//             </Typography>
-//           </Grid>
-//           {/* sx={{
-//               justifyContent: "flex-end",
-//               mt: 0,
-//               pl: 0,
-//             }} */}
-//           <CardActions disableSpacing>
-//             <Box>
-//               <Box component="h2">amazon.co.jp</Box>
-//               <IconButton aria-label="add to favorites">
-//                 <FavoriteIcon />
-//               </IconButton>
-//               <IconButton aria-label="share">
-//                 <ShareIcon />
-//               </IconButton>
-//               <ExpandMore
-//                 expand={expanded}
-//                 onClick={handleExpandClick}
-//                 aria-expanded={expanded}
-//                 aria-label="show more"
-//               >
-//                 <ExpandMoreIcon />
-//               </ExpandMore>
-//             </Box>
-//           </CardActions>
-//           <Collapse in={expanded} timeout="auto" unmountOnExit>
-//             <CardContent>
-//               <Typography paragraph>Method:</Typography>
-//               <Typography paragraph>
-//                 Heat 1/2 cup of the broth in a pot until simmering, add saffron
-//                 and set aside for 10 minutes.
-//               </Typography>
-//               <Typography paragraph>
-//                 Heat oil in a (14- to 16-inch) paella pan or a large, deep
-//                 skillet over medium-high heat. Add chicken, shrimp and chorizo,
-//                 and cook, stirring occasionally until lightly browned, 6 to 8
-//                 minutes. Transfer shrimp to a large plate and set aside, leaving
-//                 chicken and chorizo in the pan. Add pimentón, bay leaves,
-//                 garlic, tomatoes, onion, salt and pepper, and cook, stirring
-//                 often until thickened and fragrant, about 10 minutes. Add
-//                 saffron broth and remaining 4 1/2 cups chicken broth; bring to a
-//                 boil.
-//               </Typography>
-//               <Typography paragraph>
-//                 Add rice and stir very gently to distribute. Top with artichokes
-//                 and peppers, and cook without stirring, until most of the liquid
-//                 is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add
-//                 reserved shrimp and mussels, tucking them down into the rice,
-//                 and cook again without stirring, until mussels have opened and
-//                 rice is just tender, 5 to 7 minutes more. (Discard any mussels
-//                 that don&apos;t open.)
-//               </Typography>
-//               <Typography>
-//                 Set aside off of the heat to let rest for 10 minutes, and then
-//                 serve.
-//               </Typography>
-//             </CardContent>
-//           </Collapse>
-//         </Grid>
-//       </CardContent>
-//     </Card>
-//   );
-// }
